@@ -3,28 +3,12 @@ body {
   margin: 0;
 }
 
-.calendar-tue :first-child {
-  margin-left: 101px;
-}
+$weekDays: (1:tue, 2:wen, 3:thu, 4:fri, 5:set, 6:sun);
 
-.calendar-wen :first-child {
-  margin-left: 202px;
-}
-
-.calendar-thur :first-child {
-  margin-left: 303px;
-}
-
-.calendar-fri :first-child {
-  margin-left: 404px;
-}
-
-.calendar-set :first-child {
-  margin-left: 505px;
-}
-
-.calendar-sun :first-child {
-  margin-left: 606px;
+@for $i from 1 through 6 {
+  .calendar-#{map-get($weekDays, $i)} :first-child {
+    margin-left: $i*101px;
+  }
 }
 
 .calendar {
@@ -33,97 +17,37 @@ body {
   flex-wrap: wrap;
 }
 
-@mixin dayBlock {
-  display: block;
-  width: 100px;
-  height: 100px;
-  box-sizing: border-box;
-  background-color: #eee;
-  border: 1px solid black;
-  margin-right: 1px;
-  margin-top: 1px;
-}
-
-@mixin dayNum {
-  height: 100px;
-  width: 100px;
-  background-color: none;
-  color: black;
-  position: absolute;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 30px;
-  line-height: 98px;
-  text-align: center;
-}
-
-.calendar-28 {
-  @for $i from 1 to 29 {
-    :nth-child(#{$i}) {
-      @include dayBlock;
-    }
-    :nth-child(#{$i})::after {
-      @include dayNum;
-      content: "#{$i}";
-    }
-    :nth-child(#{$i}):hover {
-      cursor: pointer;
-      background-color: pink;
-      position: relative;
-      top: -20px;
-    }
-  }
-}
-
-.calendar-29 {
-  @for $i from 1 to 30 {
-    :nth-child(#{$i}) {
-      @include dayBlock;
-    }
-    :nth-child(#{$i})::after {
-      @include dayNum;
-      content: "#{$i}";
-    }
-    :nth-child(#{$i}):hover {
-      cursor: pointer;
-      background-color: pink;
-      position: relative;
-      top: -20px;
-    }
-  }
-}
-
-.calendar-30 {
-  @for $i from 1 to 31 {
-    :nth-child(#{$i}) {
-      @include dayBlock;
-    }
-    :nth-child(#{$i})::after {
-      @include dayNum;
-      content: "#{$i}";
-    }
-    :nth-child(#{$i}):hover {
-      cursor: pointer;
-      background-color: pink;
-      position: relative;
-      top: -20px;
-    }
-  }
-}
-
-.calendar-31 {
-  @for $i from 1 to 32 {
-    :nth-child(#{$i}) {
-      @include dayBlock;
-    }
-    :nth-child(#{$i})::after {
-      @include dayNum;
-      content: "#{$i}";
-    }
-    :nth-child(#{$i}):hover {
-      cursor: pointer;
-      background-color: pink;
-      position: relative;
-      top: -20px;
+@for $day from 28 through 31 {
+  .calendar-#{$day} {
+    @for $i from 1 through $day {
+      :nth-child(#{$i}) {
+        display: block;
+        width: 100px;
+        height: 100px;
+        box-sizing: border-box;
+        background-color: #eee;
+        border: 1px solid black;
+        margin-right: 1px;
+        margin-top: 1px;
+      }
+      :nth-child(#{$i})::after {
+        height: 100px;
+        width: 100px;
+        background-color: none;
+        color: black;
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 30px;
+        line-height: 98px;
+        text-align: center;
+        content: "#{$i}";
+      }
+      :nth-child(#{$i}):hover {
+        cursor: pointer;
+        background-color: pink;
+        position: relative;
+        top: -20px;
+      }
     }
   }
 }
